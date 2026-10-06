@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Fake News Detector</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+
+    <div class="container">
+
+
+        <div class="card">
+
+
+            <h1>
+                📰 Fake News Detector
+            </h1>
+
+
+            <p class="subtitle">
+                Detect whether a news article is
+                Real or Fake using Machine Learning
+            </p>
+
+
+            <form action="/predict"
+                  method="POST">
+
+
+                <label>
+                    Enter News Article
+                </label>
+
+
+                <textarea
+                    name="news_text"
+                    placeholder="Paste your news article here..."
+                    required>{{ news_text if news_text else '' }}</textarea>
+
+
+                <button type="submit">
+                    🔍 Check News
+                </button>
+
+
+            </form>
+
+
+            {% if prediction %}
+
+            <div class="result">
+
+
+                <h2>
+                    Result
+                </h2>
+
+
+                <h3
+                    class="{% if prediction == 'FAKE NEWS' %}fake{% else %}real{% endif %}">
+                    
+                    {{ prediction }}
+
+                </h3>
+
+
+                {% if confidence %}
+
+                <p>
+                    Confidence:
+                    <strong>
+                        {{ confidence }}%
+                    </strong>
+                </p>
+
+                {% endif %}
+
+
+            </div>
+
+            {% endif %}
+
+
+        </div>
+
+
+        <div class="info">
+
+
+            <h2>
+                How does it work?
+            </h2>
+
+
+            <div class="steps">
+
+
+                <div>
+                    <span>1</span>
+                    <p>
+                        User enters a news article
+                    </p>
+                </div>
+
+
+                <div>
+                    <span>2</span>
+                    <p>
+                        Text is processed using TF-IDF
+                    </p>
+                </div>
+
+
+                <div>
+                    <span>3</span>
+                    <p>
+                        Machine Learning model analyzes it
+                    </p>
+                </div>
+
+
+                <div>
+                    <span>4</span>
+                    <p>
+                        System predicts Real or Fake
+                    </p>
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+</body>
+
+</html>
